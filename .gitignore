@@ -3,4 +3,4 @@ public/
 dist/
 coverage/
 *.log
-.idea/
+.idea/git
