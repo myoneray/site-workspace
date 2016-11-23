@@ -142,7 +142,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-2016-10-25- html-webpack-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2016-11-23-directive" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,7 +152,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/25/2016-10-25- html-webpack-plugin/">html-webpack-plugin</a>
+      <a class="article-title" href="/2016/11/23/2016-11-23-directive/">Angular指令数据绑定</a>
     </h1>
   
 
@@ -160,21 +160,283 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> webpack 插件： html-webpack-plugin<br>
+        <h4 id="准备项目示例"><a href="#准备项目示例" class="headerlink" title="准备项目示例"></a>准备项目示例</h4><p> 参考源码： <a href="https://github.com/momicafe/pro-angularjs/blob/master/Chapter%2009/Listing%2001.html" target="_blank" rel="external">https://github.com/momicafe/pro-angularjs/blob/master/Chapter%2009/Listing%2001.html</a></p>
+<ul>
+<li><p>Angular数据绑定有几种类型?</p>
+<ul>
+<li><p>Angular如何修改内联绑定符  <code></code> ?</p>
+</li>
+<li><p>Angular如何隐藏模板标记?</p>
+</li>
+<li><p>Angular scope如何工作?</p>
+</li>
+<li><p>Angular ng-bind 与 ng-bind-template区别?</p>
+<pre><code><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">     There are <span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-bind</span>=<span class="string">"todos.length"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span> items</div><div class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-bind-template</span>=</span></div><div class="line">      <span class="string">"First: </span><span class="template-variable">&#123;&#123;todos[0].<span class="builtin-name">action</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">. Second: </span></span></span><span class="template-variable">&#123;&#123;todos[1].<span class="builtin-name">action</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></div><div class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>说明：<code>ng-bind</code> 只能处理单个数据绑定表达式， <code>ng-bind-template</code>可以处理多个数据绑定。所以一般用内联绑定符     （双括号，草拟娘的，hexo编译会自动屏蔽双大括号这个符号，MB~）  绑定数据。 傻子才会用这两个。O(∩_∩)O~</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/23/2016-11-23-directive/" class="archive-article-date">
+  	<time datetime="2016-11-23T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-23</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular基础/">angular基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据绑定/">数据绑定</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-11-23-module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/09/2016-11-23-module/">Angular应用刨析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="9-1-准备项目示例"><a href="#9-1-准备项目示例" class="headerlink" title="9.1 准备项目示例"></a>9.1 准备项目示例</h4><p> 参考源码： <a href="https://github.com/momicafe/pro-angularjs/blob/master/Chapter%2009/Listing%2001.html" target="_blank" rel="external">https://github.com/momicafe/pro-angularjs/blob/master/Chapter%2009/Listing%2001.html</a></p>
+<h4 id="9-2-使用模块工作"><a href="#9-2-使用模块工作" class="headerlink" title="9.2 使用模块工作"></a>9.2 使用模块工作</h4><p>创建模块：<br>  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> myApp=angular.<span class="keyword">module</span>(<span class="comment">'exampleApp',[])</span></div></pre></td></tr></table></figure></p>
+<p>  module方法接受三个参数，但通常只使用前两个参数。 惯例给模块App的后缀名。<br>  这个习惯清楚的体现出模块代表的是代码结构的顶层。这个做会在多模块的复杂应用中很有用。</p>
+<p>模块方法接受的参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>新模块的名称</td>
+</tr>
+<tr>
+<td>requires</td>
+<td>该模块所依赖的模块集合</td>
+</tr>
+<tr>
+<td>config</td>
+<td>改模块的配置。等同于Module.config方法</td>
+</tr>
+</tbody>
+</table>
+<p>注意<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> myApp=angular.<span class="keyword">module</span>(<span class="comment">'exampleApp')</span></div></pre></td></tr></table></figure></p>
+<p>这样忽略requires参数，结果是模块试图查找一个之前创建的exampleApp的模块。<br>而不是创建一个新的。而且通常会报错，没报错就说明已经有一个同名的模块。</p>
+<p>在HTML中引应用ng-app属性：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">html</span> ng-app=<span class="string">"exampleApp"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>ng-app属性是在angularjs生命周期的bootstrap阶段被使用。不同于bootstrap CSS框架哦。</p>
+<h4 id="9-3-使用模块定义AngularJS组件"><a href="#9-3-使用模块定义AngularJS组件" class="headerlink" title="9.3 使用模块定义AngularJS组件"></a>9.3 使用模块定义AngularJS组件</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>animation</td>
+<td>动画特性</td>
+</tr>
+<tr>
+<td>config</td>
+<td>注册一个在模块加载时对模块的配置函数</td>
+</tr>
+<tr>
+<td>constant</td>
+<td>定义一个返回常亮服务</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>创建控制器</td>
+</tr>
+<tr>
+<td>directiv</td>
+<td>创建一个指令</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>创建一个服务</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>创建一个过滤器</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>创建一个服务</td>
+</tr>
+<tr>
+<td>name</td>
+<td>返回模块名</td>
+</tr>
+<tr>
+<td>run</td>
+<td>注册一个在angularJS加载完毕后用于对所有模块配置的函数</td>
+</tr>
+<tr>
+<td>service</td>
+<td>创建一个服务</td>
+</tr>
+<tr>
+<td>vaiue</td>
+<td>定义一个返回常量服务</td>
+</tr>
+</tbody>
+</table>
+<p>Module的对象定义的方法可以范围三类：</p>
+<ul>
+<li>为angulJS程序定义组件</li>
+<li>使得</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/09/2016-11-23-module/" class="archive-article-date">
+  	<time datetime="2016-11-09T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-09</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular基础/">angular基础</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-11-09" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/09/2016-11-09/">Angular Material Dynamic Themes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先看效果： <a href="http://codepen.io/myoneray/pen/RoWGmp?editors=1010">http://codepen.io/myoneray/pen/RoWGmp?editors=1010</a></p>
+<p>angular Material 主题的修改主要围绕 <code>$mdThemingProvider</code>服务展开：</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/10/25/2016-10-25- html-webpack-plugin/#more">more >></a>
+          <a class="article-more-a"  href="/2016/11/09/2016-11-09/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/10/25/2016-10-25- html-webpack-plugin/" class="archive-article-date">
-  	<time datetime="2016-10-25T01:38:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-25</time>
+      <a href="/2016/11/09/2016-11-09/" class="archive-article-date">
+  	<time datetime="2016-11-09T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-09</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html-webpack-plugin/">html-webpack-plugin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前段/">前段</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架搭建/">框架搭建</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular-Material/">Angular Material</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Themes/">Dynamic Themes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Themes/">Themes</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-11-08" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/2016-11-08/">2016年11月08日</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>Angular Material 默认不支持字体颜色，如下方法可以设置当前字体为主题默认颜色：<br><code>&lt;h2  md-colors=&quot;{color:&#39;primary&#39;}&quot;&gt; 账号系统 &lt;small class=&quot;md-caption&quot;&gt;/ 账户管理&lt;/small&gt;&lt;/h2&gt;</code><br>see: <a href="http://stackoverflow.com/questions/28487327/how-to-set-text-color-in-angular-material?answertab=active#tab-top">http://stackoverflow.com/questions/28487327/how-to-set-text-color-in-angular-material?answertab=active#tab-top</a></p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/11/08/2016-11-08/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/08/2016-11-08/" class="archive-article-date">
+  	<time datetime="2016-11-08T07:06:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-08</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular-Material/">Angular Material</a></li></ul>
 	</div>
 
       
@@ -234,6 +496,58 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前段/">前段</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架搭建/">框架搭建</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-10-25- html-webpack-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/25/2016-10-25- html-webpack-plugin/">html-webpack-plugin</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> webpack 插件： html-webpack-plugin<br>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/10/25/2016-10-25- html-webpack-plugin/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/25/2016-10-25- html-webpack-plugin/" class="archive-article-date">
+  	<time datetime="2016-10-25T01:38:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-25</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html-webpack-plugin/">html-webpack-plugin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前段/">前段</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架搭建/">框架搭建</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
 	</div>
 
       
@@ -359,218 +673,6 @@
 
 
   
-    <article id="post-2016-10-17-博客主题修改部署问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/12/2016-10-17-博客主题修改部署问题/">博客主题修改部署问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原博客主题修改完成后报错，及其决绝办法！<br>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/10/12/2016-10-17-博客主题修改部署问题/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/10/12/2016-10-17-博客主题修改部署问题/" class="archive-article-date">
-  	<time datetime="2016-10-12T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-12</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前段/">前段</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经验/">经验</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2016-10-13-MD-Example" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/12/2016-10-13-MD-Example/">Editor</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Editor-md"><a href="#Editor-md" class="headerlink" title="Editor.md"></a>Editor.md</h1><p>md示例～</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/09/12/2016-10-13-MD-Example/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/09/12/2016-10-13-MD-Example/" class="archive-article-date">
-  	<time datetime="2016-09-12T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-12</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Editor/">Editor</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2016-10-17-node安装" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/12/2016-10-17-node安装/">node 安装</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="卸载node"><a href="#卸载node" class="headerlink" title="卸载node"></a>卸载node</h3><blockquote>
-<p>$  nvm uninstall –lts<br>$  sudo apt-get remove nodejs<br>$  apt-get autoremove nodejs</p>
-</blockquote>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/07/12/2016-10-17-node安装/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/07/12/2016-10-17-node安装/" class="archive-article-date">
-  	<time datetime="2016-07-12T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-12</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nvm/">nvm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前段/">前段</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2016-10-17-npm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/17/2016-10-17-npm/">npm</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="淘宝镜像："><a href="#淘宝镜像：" class="headerlink" title="淘宝镜像："></a>淘宝镜像：</h3><blockquote>
-<p>–registry=<a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org</a></p>
-</blockquote>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/02/17/2016-10-17-npm/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/02/17/2016-10-17-npm/" class="archive-article-date">
-  	<time datetime="2016-02-17T00:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-17</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/">note</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前段/">前段</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -635,7 +737,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/Editor/" style="font-size: 10px;">Editor</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/html-webpack-plugin/" style="font-size: 10px;">html-webpack-plugin</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/note/" style="font-size: 10px;">note</a> <a href="/tags/npm/" style="font-size: 12.5px;">npm</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/webpack/" style="font-size: 17.5px;">webpack</a> <a href="/tags/前段/" style="font-size: 20px;">前段</a> <a href="/tags/博客/" style="font-size: 12.5px;">博客</a> <a href="/tags/框架搭建/" style="font-size: 15px;">框架搭建</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/经验/" style="font-size: 12.5px;">经验</a>
+    				<a href="/tags/Angular/" style="font-size: 12.5px;">Angular</a> <a href="/tags/Angular-Material/" style="font-size: 12.5px;">Angular Material</a> <a href="/tags/Dynamic-Themes/" style="font-size: 10px;">Dynamic Themes</a> <a href="/tags/Editor/" style="font-size: 10px;">Editor</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Themes/" style="font-size: 10px;">Themes</a> <a href="/tags/angular基础/" style="font-size: 12.5px;">angular基础</a> <a href="/tags/html-webpack-plugin/" style="font-size: 10px;">html-webpack-plugin</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/note/" style="font-size: 10px;">note</a> <a href="/tags/npm/" style="font-size: 12.5px;">npm</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/webpack/" style="font-size: 17.5px;">webpack</a> <a href="/tags/前段/" style="font-size: 20px;">前段</a> <a href="/tags/博客/" style="font-size: 12.5px;">博客</a> <a href="/tags/数据绑定/" style="font-size: 10px;">数据绑定</a> <a href="/tags/框架搭建/" style="font-size: 15px;">框架搭建</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/经验/" style="font-size: 12.5px;">经验</a>
     			</div>
     	</section>
     
