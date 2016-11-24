@@ -10,9 +10,9 @@ tags:
 ---
 
 
-
 > 准备项目示例
  参考源码： https://github.com/momicafe/pro-angularjs/blob/master/Chapter%2009/Listing%2001.html
+ <!-- more -->
 
 * Angular数据绑定有几种类型?
 *  Angular如何修改内联绑定符  `{{XXXX}}` ?
